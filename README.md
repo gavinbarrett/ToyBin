@@ -5,8 +5,8 @@ ToyBin is a simple Bash script I use to keep my home directory nice and clean. I
 To download, simply clone the repo:
 ```bash
 # download the script from this repository
-curl https://github.com/gavinbarrett/ToyBin/
-# mv the script into your 
+curl -O https://raw.githubusercontent.com/gavinbarrett/ToyBin/master/toybin
+# mv the script into your
 mv toybin .local/bin
 ```
 
