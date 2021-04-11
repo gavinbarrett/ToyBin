@@ -1,13 +1,27 @@
 #!/usr/bin/env bash
 
-trial() {
-	echo "This is a trial"
-}
-
 create_toybin() {
 	# .toybin directory doesn't exist; create it
-	echo "Creating Toybin directory."
+	echo "Creating ToyBin directory."
 	mkdir /home/$USER/.toybin/
+}
+
+sort_files() {
+	files=$(ls)
+	for f in $files
+	do
+		ext=$(echo "$f" | cut -d "." -f2)
+		if [ ! -d "/home/$USER/.toybin/$ext" ]
+		then
+			# create a new file for the extension type
+			mkdir /home/$USER/.toybin/$ext
+			# move the file to the directory
+			mv $f /home/$USER/.toybin/$ext/$f
+		else
+			# move the file to the directory
+			mv $f /home/$USER/.toybin/$ext/$f
+		fi
+	done
 }
 
 check_init_status() {
@@ -15,18 +29,10 @@ check_init_status() {
 	if [ -d "/home/$USER/.toybin/" ]
 	then
 		# .toybin directory exists
-		echo "Toybin initialized."
+		sort_files
 	else
 		create_toybin
 	fi
 }
 
-get_contents() {
-	files=$(ls)
-	for f in $files
-	do
-		echo "$f" | cut -d "." -f2
-	done
-}
-
-create_toybin
+check_init_status
